@@ -11,20 +11,35 @@ function randomHexaNumberGenerator(num){
     return result;
     }
 
-    document.querySelector('#getCountryName').addEventListener('click', getCountryNames());
-    document.querySelector('#getRegion').addEventListener('click', getRegion());
-    document.querySelector('#getPopulation').addEventListener('click', getPopulation());
-   
+   document.querySelector('#getCountryProperty').addEventListener('click', function(e) {
+    e.preventDefault();
+    getCountryProperties();
+   });
 
-   
+    document.querySelector('#getRegion').addEventListener('click', function(e) {
+        e.preventDefault();
+        getRegion();
+    });
     
+ document.querySelector('#getPopulation').addEventListener('click', function(e){ 
+    e.preventDefault();
+    getPopulation();
+ });
 
-        function getCountryNames(){
+ document.querySelector('#getNames').addEventListener('click', function(e){ 
+    e.preventDefault();
+    getCountryNames();
+ });
+   
+
+        function getCountryProperties(){
+           
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let output = "<h2>Names of the Countries</h2>";
-                countries.forEach(function(country) {
+                let output = "<h2>Country's Properties</h2>";
+                countries.forEach((country) =>{
+                    
                    /* output += `${country.name} --> ${country.capital} <br /> ` */
                    output += `
                      <ul>
@@ -36,43 +51,76 @@ function randomHexaNumberGenerator(num){
                        
                      </ul>
                    `;
+                   
                     
                 });
-                document.querySelector("#getCountryName").innerHTML = output;
+            document.querySelector("#getCountryProperty").innerHTML += output;
             })
         }
-        wrapper.innerHTML = "";
-        getCountryNames();
-       
+        
+        
         
     
         function getRegion(){
+            
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let output = "<h2>Names of the corresponding Regions</h2>";
+                let output = "<h2>Names of the Regions</h2>";
                 countries.forEach(function(country) {
-                    output += `${country.region} <br /> ` 
+                    output += `${country.name} ---> ${country.region} <br /> ` 
                     
                     
                 });
-                document.querySelector("#getRegion").innerHTML = output;
+                
+           document.querySelector("#getRegion").innerHTML = output;
             })
         }
-        getRegion();
-        wrapper.innerHTML = "";
-
+       
+        
+        
+       
+        
+        function getCountryNames(){
+            fetch(url)
+            .then((response) => response.json())
+            .then((countries) => {
+                let output = "<h2>Countries with their Names</h2>";
+                countries.forEach(function(country) {
+                    output += `${country.name} <br /> ` 
+                    
+                    
+                });
+                
+           document.querySelector("#getNames").innerHTML = output;
+            })
+        }
         
         function getPopulation(){
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let output = "<h2>Names of the Countries with their Population</h2>";
+                let output = "<h2>Countries with their Population</h2>";
                 countries.forEach(function(country) {
-                    output += `${country.name} ---->${country.population} <br /> ` 
+                    output += `${country.name}--->${country.population}<br /> ` 
+                    
                     
                 });
-                document.querySelector("#getPopulation").innerHTML = output;
+                
+           document.querySelector("#getPopulation").innerHTML = output;
             })
         }
-        getPopulation();
+      
+
+        if(getCountryNames.checked === true){
+            
+            getCountryNames();
+        }else if(getRegion.checked === true){
+            
+            getRegion();
+        }else if(getPopulation.checked === true) {
+            
+            getPopulation();
+        }else if(getCountryProperty.checked === true) {
+            getCountryProperties();
+        }

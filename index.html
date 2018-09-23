@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>API-Project</title>
+    <link rel="stylesheet" type="text/css" href="api.css" media="screen"/>
 </head>
 <body>
-    
-    <button id="getCountryName">Get countries</button>
-   <button id="getRegion">Get Region</button>
-   <!-- <button id="getCapital">Get Capital</button>-->
-    <button id="getPopulation">Get Population</button>
+    <p id="paragraph"><b>Select the Category you will like to view<b></p>
+    <button onclick="getCountryProperties()" id="getCountryProperty" class="btn">Get country's Properties</button>
+   <button onclick="getRegion()" id="getRegion" class="btn">Get Country's Region</button>
+   <button onclick="getCountryNames()" id="getNames" class="btn">Get Names</button>
+    <button onclick="getPopulation()" id="getPopulation" class="btn">Get Country's Population</button>
 
     
     
