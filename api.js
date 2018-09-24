@@ -31,12 +31,17 @@ function randomHexaNumberGenerator(num){
     getCountryNames();
  });
    
+ document.querySelector('#Search').addEventListener('keyup', function(e){ 
+    e.preventDefault();
+    searchEngine();
+ });
 
         function getCountryProperties(){
            
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
+                
                 let output = "<h2>Country's Properties</h2>";
                 countries.forEach((country) =>{
                     
@@ -51,10 +56,11 @@ function randomHexaNumberGenerator(num){
                        
                      </ul>
                    `;
-                   
+                  
                     
                 });
-            document.querySelector("#getCountryProperty").innerHTML += output;
+                let container = document.querySelector("#searchResults");
+                container.innerHTML = output;
             })
         }
         
@@ -73,7 +79,8 @@ function randomHexaNumberGenerator(num){
                     
                 });
                 
-           document.querySelector("#getRegion").innerHTML = output;
+                let container = document.querySelector("#searchResults");
+                container.innerHTML = output;
             })
         }
        
@@ -82,6 +89,7 @@ function randomHexaNumberGenerator(num){
        
         
         function getCountryNames(){
+    
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
@@ -92,7 +100,8 @@ function randomHexaNumberGenerator(num){
                     
                 });
                 
-           document.querySelector("#getNames").innerHTML = output;
+                let container = document.querySelector("#searchResults");
+                container.innerHTML = output;
             })
         }
         
@@ -100,19 +109,42 @@ function randomHexaNumberGenerator(num){
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let output = "<h2>Countries with their Population</h2>";
-                countries.forEach(function(country) {
-                    output += `${country.name}--->${country.population}<br /> ` 
+                let output = "<h2>Countries with their Population and Flag</h2>";
+                countries.forEach((country) => {
+                    output += `${country.name}--->${country.population} -->${country.flag}<br /> ` 
                     
                     
                 });
                 
-           document.querySelector("#getPopulation").innerHTML = output;
+                let container = document.querySelector("#searchResults");
+                container.innerHTML = output;
             })
+        } 
+
+        function searchEngine(){
+            
+            let inputText = document.querySelector('#Search');
+            let inputValue = inputText.value.toLowerCase();
+            fetch(url)
+            .then((response) => response.json())
+            .then((countries) => {
+
+                let output = "";
+             let results = countries.filter(country => country.name.toLowerCase().startsWith(inputValue));
+                 
+             results.forEach((result) =>  {
+                output += `${result.name} <br /> `;
+
+             });          
+            let container = document.querySelector("#searchResults");
+           container.innerHTML = output;
+            });
+           
         }
+       
       
 
-        if(getCountryNames.checked === true){
+      /* if(getCountryNames.checked === true){
             
             getCountryNames();
         }else if(getRegion.checked === true){
@@ -123,4 +155,6 @@ function randomHexaNumberGenerator(num){
             getPopulation();
         }else if(getCountryProperty.checked === true) {
             getCountryProperties();
-        }
+        }else if(searchEngine.checked === true) {
+            searchEngine();
+        }*/
