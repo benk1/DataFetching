@@ -54,6 +54,7 @@ function randomHexaNumberGenerator(num){
                        <li>Timezone:${country.timezone}</li>
                        <li>Nativename:${country.nativeName}</li>
                        
+                       
                      </ul>
                    `;
                   
@@ -95,7 +96,8 @@ function randomHexaNumberGenerator(num){
             .then((countries) => {
                 let output = "<h2>Countries with their Names</h2>";
                 countries.forEach(function(country) {
-                    output += `${country.name} <br /> ` 
+                    
+                    output += `${country.name}  <br /> ` ;
                     
                     
                 });
@@ -109,9 +111,9 @@ function randomHexaNumberGenerator(num){
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let output = "<h2>Countries with their Population and Flag</h2>";
+                let output = "<h2>Countries with their Population </h2>";
                 countries.forEach((country) => {
-                    output += `${country.name}--->${country.population} -->${country.flag}<br /> ` 
+                    output += `${country.name}--->${country.population} <br /> ` 
                     
                     
                 });
@@ -122,8 +124,9 @@ function randomHexaNumberGenerator(num){
         } 
 
         function searchEngine(){
+            wrapper.innerHTML = "";
             
-            let inputText = document.querySelector('#Search');
+             let inputText = document.querySelector('#Search');
             let inputValue = inputText.value.toLowerCase();
             fetch(url)
             .then((response) => response.json())
@@ -133,13 +136,22 @@ function randomHexaNumberGenerator(num){
              let results = countries.filter(country => country.name.toLowerCase().startsWith(inputValue));
                  
              results.forEach((result) =>  {
-                output += `${result.name} <br /> `;
-
-             });          
-            let container = document.querySelector("#searchResults");
-           container.innerHTML = output;
+                const singleDiv = document.createElement('div');
+                singleDiv.id = "loopDiv";
+                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+                const image = document.createElement('img');
+                let img = `<img src="${result.flag}"/>`;
+                
+             //output += `${result.name}  ${img},${result.region}, ${result.population} <br /> `;
+             singleDiv.innerHTML += ` ${result.name}  ${img}  ${result.region}  `;
+            wrapper.appendChild(singleDiv);
+             });         
+            // let container = document.querySelector("#searchResults");
+            // container.innerHTML = output;
+             
+            
             });
-           
+            
         }
        
       
