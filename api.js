@@ -36,6 +36,11 @@ function randomHexaNumberGenerator(num){
     searchEngine();
  });
 
+ //document.querySelector('#getFreq').addEventListener('click', function(e){ 
+   // e.preventDefault();
+    //getCountryFreq();
+ //});
+
         function getCountryProperties(){
            
             fetch(url)
@@ -70,58 +75,76 @@ function randomHexaNumberGenerator(num){
     
         function getRegion(){
             
-            fetch(url)
+            let inputText = document.querySelector('#getRegion');
+            let inputValue = inputText.value.toLowerCase();
+            
+             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let output = "<h2>Names of the Regions</h2>";
-                countries.forEach(function(country) {
-                    output += `${country.name} ---> ${country.region} <br /> ` 
-                    
-                    
-                });
+                let results = countries.filter(country => country.name.toLowerCase().includes(inputValue));
                 
-                let container = document.querySelector("#searchResults");
-                container.innerHTML = output;
+                results.forEach((result) =>  {
+                const singleDiv = document.createElement('div');
+                singleDiv.id = "loopDiv";
+                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+                //const image = document.createElement('img');
+                //let img = `<img src="${result.flag} "/>`;
+                singleDiv.innerHTML += ` ${result.name} Belongs to  ${result.region} continent `;
+                wrapper.appendChild(singleDiv);
+                    
+                     });
+                
             })
         }
-       
         
         
        
         
         function getCountryNames(){
-    
-            fetch(url)
+            let inputText = document.querySelector('#getNames');
+            let inputValue = inputText.value.toLowerCase();
+            
+             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let output = "<h2>Countries with their Names</h2>";
-                countries.forEach(function(country) {
-                    
-                    output += `${country.name}  <br /> ` ;
-                    
-                    
-                });
+                let results = countries.filter(country => country.name.toLowerCase().includes(inputValue));
                 
-                let container = document.querySelector("#searchResults");
-                container.innerHTML = output;
+                results.forEach((result) =>  {
+                const singleDiv = document.createElement('div');
+                singleDiv.id = "loopDiv";
+                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+                const image = document.createElement('img');
+                let img = `<img src="${result.flag} "/>`;
+                singleDiv.innerHTML += ` ${result.name}  ${img} `;
+                wrapper.appendChild(singleDiv);
+                    
+                     });
+                
             })
         }
         
         function getPopulation(){
-            fetch(url)
+            let inputText = document.querySelector('#getPopulation');
+            let inputValue = inputText.value.toLowerCase();
+            
+             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let output = "<h2>Countries with their Population </h2>";
-                countries.forEach((country) => {
-                    output += `${country.name}--->${country.population} <br /> ` 
-                    
-                    
-                });
+                let results = countries.filter(country => country.name.toLowerCase().includes(inputValue));
                 
-                let container = document.querySelector("#searchResults");
-                container.innerHTML = output;
+                results.forEach((result) =>  {
+                const singleDiv = document.createElement('div');
+                singleDiv.id = "loopDiv";
+                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+                //const image = document.createElement('img');
+                //let img = `<img src="${result.flag} "/>`;
+                singleDiv.innerHTML += ` ${result.name} Has  ${result.population}  habitants `;
+                wrapper.appendChild(singleDiv);
+                    
+                     });
+                
             })
-        } 
+        }
 
         function searchEngine(){
             wrapper.innerHTML = "";
@@ -133,8 +156,7 @@ function randomHexaNumberGenerator(num){
             .then((countries) => {
 
                 let output = "";
-             let results = countries.filter(country => country.name.toLowerCase().startsWith(inputValue));
-                 
+             let results = countries.filter(country => country.name.toLowerCase().includes(inputValue));
              results.forEach((result) =>  {
                 const singleDiv = document.createElement('div');
                 singleDiv.id = "loopDiv";
@@ -143,17 +165,40 @@ function randomHexaNumberGenerator(num){
                 let img = `<img src="${result.flag}"/>`;
                 
              //output += `${result.name}  ${img},${result.region}, ${result.population} <br /> `;
-             singleDiv.innerHTML += ` ${result.name}  ${img}  ${result.region}  `;
+             singleDiv.innerHTML += ` ${result.name}    ${result.capital}  ${result.region} ${img} `;
             wrapper.appendChild(singleDiv);
              });         
             // let container = document.querySelector("#searchResults");
             // container.innerHTML = output;
-             
+              });
+             }
+
+            /* function getCountryFreq(){
+                let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+                let countryObj = [];
+                
+    
+                fetch(url)
+                .then((response) => response.json())
+                .then((countries) => {
+                    for(letter of letters) {
+               const singleDiv = document.createElement('div');
+                singleDiv.id = "loopDiv";
+                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+                        let times = countries.filter(country => letter === country[0]);
+                        countryObj.push({letter,times:times.length})   
+                    }
+                    countryObj.sort(function(a,b){
+                        return b.times - a.times;
+                    });
+                       return countryObj[0];
+                });
+                
+            }*/
             
-            });
+
+
             
-        }
-       
       
 
       /* if(getCountryNames.checked === true){
