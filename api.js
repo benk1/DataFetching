@@ -42,32 +42,43 @@ function randomHexaNumberGenerator(num){
  //});
 
         function getCountryProperties(){
+            wrapper.innerHTML = "";
+             let inputText = document.querySelector('#getCountryProperty');
+            let inputValue = inputText.value.toLowerCase();
            
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
                 
-                let output = "<h2>Country's Properties</h2>";
+                
+                //let output = "<h2>Country's Properties</h2>";
                 countries.forEach((country) =>{
-                    let lan = `"${country.languages}"`;
-                    
-                   /* output += `${country.name} --> ${country.capital} <br /> ` */
-                   output += `
+                const singleDiv = document.createElement('div');
+                singleDiv.id = "loopDiv";
+                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+                
+                let lan = country.languages;
+                for(let i = 0; i < lan.length; i++) {
+                    let  lanValue = lan[i].name;
+               
+                
+
+                     /* output += `${country.name} --> ${country.capital} <br /> ` */
+                   singleDiv.innerHTML  += `
                      <ul>
                        <li>Country:${country.name}</li>
                        <li>Capital:${country.capital}</li>
-                       <li>Language:${lan}</li>
+                       <li>Language:${lanValue}</li>
                        <li>Timezone:${country.timezone}</li>
                        <li>Nativename:${country.nativeName}</li>
-                       
-                       
-                     </ul>
+                       </ul>
                    `;
+                   wrapper.appendChild(singleDiv);
+                }
+                  });
                   
-                    
-                });
-                let container = document.querySelector("#searchResults");
-                container.innerHTML = output;
+                //let container = document.querySelector("#searchResults");
+                        //container.innerHTML = output;
             })
         }
         
@@ -75,6 +86,7 @@ function randomHexaNumberGenerator(num){
         
     
         function getRegion(){
+            wrapper.innerHTML = "";
             
             let inputText = document.querySelector('#getRegion');
             let inputValue = inputText.value.toLowerCase();
@@ -102,6 +114,7 @@ function randomHexaNumberGenerator(num){
        
         
         function getCountryNames(){
+            wrapper.innerHTML = "";
             let inputText = document.querySelector('#getNames');
             let inputValue = inputText.value.toLowerCase();
             
@@ -126,6 +139,7 @@ function randomHexaNumberGenerator(num){
         }
         
         function getPopulation(){
+            wrapper.innerHTML = "";
             let inputText = document.querySelector('#getPopulation');
             let inputValue = inputText.value.toLowerCase();
             
@@ -159,7 +173,7 @@ function randomHexaNumberGenerator(num){
 
                 let output = "";
              let results = countries.filter(country => country.name.toLowerCase().includes(inputValue)
-             || country.capital.toLowerCase().includes(inputValue));
+             || country.capital.toLowerCase().includes(inputValue) || country.region.toLowerCase().includes(inputValue));
              results.forEach((result) =>  {
                 const singleDiv = document.createElement('div');
                 singleDiv.id = "loopDiv";
