@@ -49,13 +49,14 @@ function randomHexaNumberGenerator(num){
                 
                 let output = "<h2>Country's Properties</h2>";
                 countries.forEach((country) =>{
+                    let lan = `"${country.languages}"`;
                     
                    /* output += `${country.name} --> ${country.capital} <br /> ` */
                    output += `
                      <ul>
                        <li>Country:${country.name}</li>
                        <li>Capital:${country.capital}</li>
-                       <li>Language:${country.language}</li>
+                       <li>Language:${lan}</li>
                        <li>Timezone:${country.timezone}</li>
                        <li>Nativename:${country.nativeName}</li>
                        
@@ -107,7 +108,8 @@ function randomHexaNumberGenerator(num){
              fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let results = countries.filter(country => country.name.toLowerCase().includes(inputValue));
+                let results = countries.filter
+                (country => country.capital.toLowerCase().includes(inputValue));
                 
                 results.forEach((result) =>  {
                 const singleDiv = document.createElement('div');
@@ -138,7 +140,7 @@ function randomHexaNumberGenerator(num){
                 singleDiv.style.backgroundColor = randomHexaNumberGenerator();
                 //const image = document.createElement('img');
                 //let img = `<img src="${result.flag} "/>`;
-                singleDiv.innerHTML += ` ${result.name} Has  ${result.population}  habitants `;
+                singleDiv.innerHTML += ` ${result.name} Has --> ${result.population}  habitants `;
                 wrapper.appendChild(singleDiv);
                     
                      });
@@ -156,7 +158,8 @@ function randomHexaNumberGenerator(num){
             .then((countries) => {
 
                 let output = "";
-             let results = countries.filter(country => country.name.toLowerCase().includes(inputValue));
+             let results = countries.filter(country => country.name.toLowerCase().includes(inputValue)
+             || country.capital.toLowerCase().includes(inputValue));
              results.forEach((result) =>  {
                 const singleDiv = document.createElement('div');
                 singleDiv.id = "loopDiv";
@@ -165,7 +168,7 @@ function randomHexaNumberGenerator(num){
                 let img = `<img src="${result.flag}"/>`;
                 
              //output += `${result.name}  ${img},${result.region}, ${result.population} <br /> `;
-             singleDiv.innerHTML += ` ${result.name}    ${result.capital}  ${result.region} ${img} `;
+             singleDiv.innerHTML += ` ${result.name}  capital city is  ${result.capital} and belongs to ${result.region} continent ${img} `;
             wrapper.appendChild(singleDiv);
              });         
             // let container = document.querySelector("#searchResults");
