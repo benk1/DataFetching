@@ -12,7 +12,7 @@ function randomHexaNumberGenerator(num){
     }
 
    document.querySelector('#getCountryProperty').addEventListener('click', function(e) {
-    e.preventDefault();
+    //e.preventDefault();
     getCountryProperties();
    });
 
@@ -130,7 +130,7 @@ function randomHexaNumberGenerator(num){
                 singleDiv.style.backgroundColor = randomHexaNumberGenerator();
                 const image = document.createElement('img');
                 let img = `<img src="${result.flag} "/>`;
-                singleDiv.innerHTML += ` ${result.name}  ${img} `;
+                singleDiv.innerHTML += ` ${result.name}` + img ;
                 wrapper.appendChild(singleDiv);
                     
                      });
@@ -182,7 +182,7 @@ function randomHexaNumberGenerator(num){
                 let img = `<img src="${result.flag}"/>`;
                 
              //output += `${result.name}  ${img},${result.region}, ${result.population} <br /> `;
-             singleDiv.innerHTML += ` ${result.name}  capital city is  ${result.capital} and belongs to ${result.region} continent ${img} `;
+             singleDiv.innerHTML += ` ${result.name}'s  capital city is  ${result.capital} and belongs to ${result.region} continent`  + img;
             wrapper.appendChild(singleDiv);
              });         
             // let container = document.querySelector("#searchResults");

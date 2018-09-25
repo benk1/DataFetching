@@ -24,11 +24,12 @@ button{
         height: 50;
     }
 img{
-    height: 61px;
-    width: 156px;
-    /*text-align: center;*/
-   line-height: 61px;
-   text-align: center;
+height: 94px;
+width: 156px;
+text-align: center;
+line-height: 67px;
+
+margin-left: 90px;
 	
 }
 #loopDiv{
