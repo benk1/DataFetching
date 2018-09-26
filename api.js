@@ -65,13 +65,12 @@ function randomHexaNumberGenerator(num){
 
                      /* output += `${country.name} --> ${country.capital} <br /> ` */
                    singleDiv.innerHTML  += `
-                     <ul>
-                       <li>Country:${country.name}</li>
-                       <li>Capital:${country.capital}</li>
-                       <li>Language:${lanValue}</li>
-                       <li>Timezone:${country.timezone}</li>
-                       <li>Nativename:${country.nativeName}</li>
-                       </ul>
+                     
+                       Country:${country.name}<br />
+                       Capital:${country.capital}<br />
+                       Language:${lanValue}<br />
+                       Timezone:${country.timezone}<br />
+                       Nativename:${country.nativeName}<br />
                    `;
                    wrapper.appendChild(singleDiv);
                 }
@@ -172,8 +171,10 @@ function randomHexaNumberGenerator(num){
             .then((countries) => {
 
                 let output = "";
-             let results = countries.filter(country => country.name.toLowerCase().includes(inputValue)
-             || country.capital.toLowerCase().includes(inputValue) || country.region.toLowerCase().includes(inputValue));
+             let results = countries.filter(country => {
+                 return country.name.toLowerCase().includes(inputValue)
+                    || country.capital.toLowerCase().includes(inputValue)
+            });
              results.forEach((result) =>  {
                 const singleDiv = document.createElement('div');
                 singleDiv.id = "loopDiv";
