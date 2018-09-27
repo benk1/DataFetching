@@ -50,30 +50,29 @@ function randomHexaNumberGenerator(num){
             .then((response) => response.json())
             .then((countries) => {
                 
-                
-                //let output = "<h2>Country's Properties</h2>";
                 countries.forEach((country) =>{
                 const singleDiv = document.createElement('div');
                 singleDiv.id = "loopDiv";
                 singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+                let lang = country.languages[0].name;
+                let currency = country.currencies[0].name;  
+                   
+                  
+                  
                 
-                let lan = country.languages;
-                for(let i = 0; i < lan.length; i++) {
-                    let  lanValue = lan[i].name;
-               
-                
-
-                     /* output += `${country.name} --> ${country.capital} <br /> ` */
-                   singleDiv.innerHTML  += `
-                     
+                /* output += `${country.name} --> ${country.capital} <br /> ` */
+                    singleDiv.innerHTML  += `
                        Country:${country.name}<br />
                        Capital:${country.capital}<br />
-                       Language:${lanValue}<br />
-                       Timezone:${country.timezone}<br />
+                       Language:${lang}<br />
+                       Timezone:${country.timezones[0]}<br />
                        Nativename:${country.nativeName}<br />
+                       Currency:${currency}<br />
+                      
                    `;
+                    
                    wrapper.appendChild(singleDiv);
-                }
+                 
                   });
                   
                 //let container = document.querySelector("#searchResults");
