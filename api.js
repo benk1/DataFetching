@@ -11,6 +11,8 @@ function randomHexaNumberGenerator(num){
     return result;
     }
 
+    getCountryProperties();
+    
    document.querySelector('#getCountryProperty').addEventListener('click', function(e) {
     //e.preventDefault();
     getCountryProperties();
@@ -36,10 +38,12 @@ function randomHexaNumberGenerator(num){
     searchEngine();
  });
 
- //document.querySelector('#getFreq').addEventListener('click', function(e){ 
-   // e.preventDefault();
-    //getCountryFreq();
- //});
+ document.querySelector('#getNames2').addEventListener('click', function(e){ 
+    e.preventDefault();
+    getCountryNames2();
+ });
+
+ 
 
         function getCountryProperties(){
             wrapper.innerHTML = "";
@@ -119,9 +123,9 @@ function randomHexaNumberGenerator(num){
              fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let results = countries.filter
-                (country => country.capital.toLowerCase().includes(inputValue));
                 
+                let results = countries.filter(country => country.name.toLowerCase());
+               
                 results.forEach((result) =>  {
                 const singleDiv = document.createElement('div');
                 singleDiv.id = "loopDiv";
@@ -133,8 +137,40 @@ function randomHexaNumberGenerator(num){
                     
                      });
                 
-            })
+            });
         }
+
+        function getCountryNames2(){
+            
+            wrapper.innerHTML = "";
+            let inputText = document.querySelector('#getNames2');
+            let inputValue = inputText.value.toLowerCase();
+            fetch(url)
+            .then((response) => response.json())
+            .then((countries) => {
+                //arrayOfString = [];
+               const reversedArray = countries.map(country => {
+                const singleDiv = document.createElement('div');
+                singleDiv.id = "loopDiv";
+                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+            
+
+                return country.name
+               
+            }).reverse().forEach(a  => {
+                console.log(a)
+            });
+            const singleDiv = document.createElement('div');
+            singleDiv.textContent = reversedArray;
+            wrapper.appendChild(singleDiv);
+        });
+        //console.log(arrayOfString.sort(),"ghf");
+        
+    }
+                
+                
+    
+
         
         function getPopulation(){
             wrapper.innerHTML = "";
@@ -157,7 +193,7 @@ function randomHexaNumberGenerator(num){
                     
                      });
                 
-            })
+            });
         }
 
         function searchEngine(){
@@ -188,30 +224,7 @@ function randomHexaNumberGenerator(num){
             // let container = document.querySelector("#searchResults");
             // container.innerHTML = output;
               });
-             }
-
-            /* function getCountryFreq(){
-                let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-                let countryObj = [];
-                
-    
-                fetch(url)
-                .then((response) => response.json())
-                .then((countries) => {
-                    for(letter of letters) {
-               const singleDiv = document.createElement('div');
-                singleDiv.id = "loopDiv";
-                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
-                        let times = countries.filter(country => letter === country[0]);
-                        countryObj.push({letter,times:times.length})   
-                    }
-                    countryObj.sort(function(a,b){
-                        return b.times - a.times;
-                    });
-                       return countryObj[0];
-                });
-                
-            }*/
+            }
             
 
 
