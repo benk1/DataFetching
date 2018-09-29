@@ -23,9 +23,14 @@ function randomHexaNumberGenerator(num){
         getRegion();
     });
     
- document.querySelector('#getPopulation').addEventListener('click', function(e){ 
+ document.querySelector('#getCapital').addEventListener('click', function(e){ 
     e.preventDefault();
-    getPopulation();
+    getCapital();
+ });
+
+ document.querySelector('#getCapital2').addEventListener('click', function(e){ 
+    e.preventDefault();
+    getCapital2();
  });
 
  document.querySelector('#getNames').addEventListener('click', function(e){ 
@@ -148,53 +153,71 @@ function randomHexaNumberGenerator(num){
             fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                //arrayOfString = [];
-               const reversedArray = countries.map(country => {
+                
+               const namesArray = countries.map(country => {
+               return country.name 
+            
+                });
+            namesArray.reverse().forEach(countryName => {
                 const singleDiv = document.createElement('div');
                 singleDiv.id = "loopDiv";
                 singleDiv.style.backgroundColor = randomHexaNumberGenerator();
-            
-
-                return country.name
-               
-            }).reverse().forEach(a  => {
-                console.log(a)
+                 singleDiv.innerHTML += ` ${countryName}`  ;
+                wrapper.appendChild(singleDiv);
+                
             });
-            const singleDiv = document.createElement('div');
-            singleDiv.textContent = reversedArray;
-            wrapper.appendChild(singleDiv);
-        });
-        //console.log(arrayOfString.sort(),"ghf");
-        
-    }
+           });
+         }
                 
                 
     
 
         
-        function getPopulation(){
+        function getCapital(){
             wrapper.innerHTML = "";
-            let inputText = document.querySelector('#getPopulation');
+            let inputText = document.querySelector('#getCapital');
             let inputValue = inputText.value.toLowerCase();
-            
-             fetch(url)
+            fetch(url)
             .then((response) => response.json())
             .then((countries) => {
-                let results = countries.filter(country => country.name.toLowerCase().includes(inputValue));
-                
-                results.forEach((result) =>  {
+               const capitalArray = countries.map(country => {
+               
+               return country.capital
+               
+            });
+            capitalArray.sort().forEach(countryCapital => {
                 const singleDiv = document.createElement('div');
                 singleDiv.id = "loopDiv";
                 singleDiv.style.backgroundColor = randomHexaNumberGenerator();
-                //const image = document.createElement('img');
-                //let img = `<img src="${result.flag} "/>`;
-                singleDiv.innerHTML += ` ${result.name} Has --> ${result.population}  habitants `;
+                singleDiv.innerHTML += ` ${countryCapital}` ;
                 wrapper.appendChild(singleDiv);
-                    
-                     });
                 
             });
-        }
+           });
+         }
+
+         function getCapital2(){
+            wrapper.innerHTML = "";
+            let inputText = document.querySelector('#getCapital2');
+            let inputValue = inputText.value.toLowerCase();
+            fetch(url)
+            .then((response) => response.json())
+            .then((countries) => {
+               const capitalArray = countries.map(country => {
+               
+               return country.capital
+               
+            });
+            capitalArray.sort().reverse().forEach(countryCapital => {
+                const singleDiv = document.createElement('div');
+                singleDiv.id = "loopDiv";
+                singleDiv.style.backgroundColor = randomHexaNumberGenerator();
+                singleDiv.innerHTML += ` ${countryCapital}` ;
+                wrapper.appendChild(singleDiv);
+                
+            });
+           });
+         }
 
         function searchEngine(){
             wrapper.innerHTML = "";
