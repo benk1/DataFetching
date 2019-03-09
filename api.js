@@ -1,4 +1,5 @@
 const url = 'https://restcountries.eu/rest/v2/all';
+
 let wrapper = document.createElement('div');
 wrapper.id = "wrapperId";
 document.body.appendChild(wrapper);
@@ -30,7 +31,7 @@ function randomHexaNumberGenerator(num){
 
  document.querySelector('#getCapital2').addEventListener('click', function(e){ 
     e.preventDefault();
-    getCapital2();
+    getCapitalDesc();
  });
 
  document.querySelector('#getNames').addEventListener('click', function(e){ 
@@ -65,28 +66,18 @@ function randomHexaNumberGenerator(num){
                 singleDiv.style.backgroundColor = randomHexaNumberGenerator();
                 let lang = country.languages[0].name;
                 let currency = country.currencies[0].name;  
-                   
-                  
-                  
-                
-                /* output += `${country.name} --> ${country.capital} <br /> ` */
+                    /* output += `${country.name} --> ${country.capital} <br /> ` */
                     singleDiv.innerHTML  += `
                        Country:${country.name}<br />
                        Capital:${country.capital}<br />
                        Language:${lang}<br />
                        Timezone:${country.timezones[0]}<br />
                        Nativename:${country.nativeName}<br />
-                       Currency:${currency}<br />
-                      
+                       Currency:${currency}<br />   
                    `;
-                    
-                   wrapper.appendChild(singleDiv);
-                 
-                  });
-                  
-                //let container = document.querySelector("#searchResults");
-                        //container.innerHTML = output;
-            })
+                     wrapper.appendChild(singleDiv);
+                   });
+                   })
         }
         
         
@@ -113,8 +104,7 @@ function randomHexaNumberGenerator(num){
                 wrapper.appendChild(singleDiv);
                     
                      });
-                
-            })
+                })
         }
         
         
@@ -141,8 +131,7 @@ function randomHexaNumberGenerator(num){
                 wrapper.appendChild(singleDiv);
                     
                      });
-                
-            });
+                 });
         }
 
         function getCountryNames2(){
@@ -196,7 +185,7 @@ function randomHexaNumberGenerator(num){
            });
          }
 
-         function getCapital2(){
+         function getCapitalDesc(){
             wrapper.innerHTML = "";
             let inputText = document.querySelector('#getCapital2');
             let inputValue = inputText.value.toLowerCase();
@@ -228,7 +217,7 @@ function randomHexaNumberGenerator(num){
             .then((response) => response.json())
             .then((countries) => {
 
-                let output = "";
+                //let output = "";
              let results = countries.filter(country => {
                  return country.name.toLowerCase().includes(inputValue)
                     || country.capital.toLowerCase().includes(inputValue)
@@ -244,8 +233,7 @@ function randomHexaNumberGenerator(num){
              singleDiv.innerHTML += ` ${result.name}'s  capital city is  ${result.capital} and belongs to ${result.region} continent`  + img;
             wrapper.appendChild(singleDiv);
              });         
-            // let container = document.querySelector("#searchResults");
-            // container.innerHTML = output;
+            
               });
             }
             
@@ -254,17 +242,4 @@ function randomHexaNumberGenerator(num){
             
       
 
-      /* if(getCountryNames.checked === true){
-            
-            getCountryNames();
-        }else if(getRegion.checked === true){
-            
-            getRegion();
-        }else if(getPopulation.checked === true) {
-            
-            getPopulation();
-        }else if(getCountryProperty.checked === true) {
-            getCountryProperties();
-        }else if(searchEngine.checked === true) {
-            searchEngine();
-        }*/
+      

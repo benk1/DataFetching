@@ -8,16 +8,21 @@
 }
 #paragraph{
     font-size: 20px;
+    text-align: center;
+    font-size: 24px;
 }
 
 
 
 button:hover{
     background-color: aquamarine;
+    color: black;
 }
 
 button{
       height: 52px;
+      background-color: blue;
+      color: white;
     }
 
     #getCountryProperty{
